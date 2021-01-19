@@ -257,23 +257,6 @@ void GxEPD2_1248c::_initSPI()
 #endif
 }
 
-void GxEPD2_1248c::_setPartialRamArea(uint16_t x, uint16_t y, uint16_t w, uint16_t h)
-{
-  uint16_t xe = (x + w - 1) | 0x0007; // byte boundary inclusive (last byte)
-  uint16_t ye = y + h - 1;
-  x &= 0xFFF8; // byte boundary
-  _writeCommand(0x90); // partial window
-  _writeData(x / 256);
-  _writeData(x % 256);
-  _writeData(xe / 256);
-  _writeData(xe % 256);
-  _writeData(y / 256);
-  _writeData(y % 256);
-  _writeData(ye / 256);
-  _writeData(ye % 256);
-  _writeData(0x01);
-}
-
 void GxEPD2_1248c::_PowerOn()
 {
   if (!_power_is_on)

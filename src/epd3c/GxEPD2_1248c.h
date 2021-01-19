@@ -75,7 +75,6 @@ class GxEPD2_1248c : public GxEPD2_EPD
   private:
     void _reset();
     void _initSPI();
-    void _setPartialRamArea(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
     void _PowerOn();
     void _PowerOff();
     void _InitDisplay();
