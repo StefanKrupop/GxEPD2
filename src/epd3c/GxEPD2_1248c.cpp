@@ -155,7 +155,7 @@ void GxEPD2_1248c::writeImagePart(const uint8_t* black, const uint8_t* color, in
   M1.writeImagePart(0x10, black, x_part, y_part, w, h, x, y - S2.HEIGHT, w, h, invert, mirror_y, pgm);
   S1.writeImagePart(0x10, black, x_part, y_part, w, h, x - M1.WIDTH, y - M2.HEIGHT, w, h, invert, mirror_y, pgm);
   if (color) {
-	S2.writeImagePart(0x13, color, x_part, y_part, w, h, x, y, w, h, !invert, mirror_y, pgm);
+    S2.writeImagePart(0x13, color, x_part, y_part, w, h, x, y, w, h, !invert, mirror_y, pgm);
     M2.writeImagePart(0x13, color, x_part, y_part, w, h, x - S2.WIDTH, y, w, h, !invert, mirror_y, pgm);
     M1.writeImagePart(0x13, color, x_part, y_part, w, h, x, y - S2.HEIGHT, w, h, !invert, mirror_y, pgm);
     S1.writeImagePart(0x13, color, x_part, y_part, w, h, x - M1.WIDTH, y - M2.HEIGHT, w, h, !invert, mirror_y, pgm);
@@ -669,11 +669,15 @@ GxEPD2_1248c::ScreenPart::ScreenPart(uint16_t width, uint16_t height, bool rev_s
 
 void GxEPD2_1248c::ScreenPart::writeScreenBuffer(uint8_t command, uint8_t value)
 {
+  writeCommand(0x91); // partial in
+  delay(1);
+  _setPartialRamArea(0, 0, WIDTH, HEIGHT);
   writeCommand(command); // set current or previous
   for (uint32_t i = 0; i < uint32_t(WIDTH) * uint32_t(HEIGHT) / 8; i++)
   {
     writeData(value);
   }
+  writeCommand(0x92); // partial out
 }
 
 void GxEPD2_1248c::ScreenPart::writeImagePart(uint8_t command, const uint8_t bitmap[], int16_t x_part, int16_t y_part, int16_t w_bitmap, int16_t h_bitmap,
