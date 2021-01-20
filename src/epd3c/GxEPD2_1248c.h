@@ -97,6 +97,12 @@ class GxEPD2_1248c : public GxEPD2_EPD
     int8_t _cs_m1, _cs_s1, _cs_m2, _cs_s2;
     int8_t _busy_m1, _busy_s1, _busy_m2, _busy_s2;
     int8_t _temperature;
+    static const unsigned char lut_20_LUTC_partial[];
+    static const unsigned char lut_21_LUTWW_partial[];
+    static const unsigned char lut_22_LUTKW_partial[];
+    static const unsigned char lut_23_LUTWK_partial[];
+    static const unsigned char lut_24_LUTKK_partial[];
+    static const unsigned char lut_25_LUTBD_partial[];
   private:
     class ScreenPart
     {
