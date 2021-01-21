@@ -98,6 +98,7 @@ void GxEPD2_1248c::init(uint32_t serial_diag_bitrate, bool initial, uint16_t res
   _reset();
   // only relevant for full refresh, comment out if 20 is ok
   _getMasterTemperature();
+  _InitDisplay();
 }
 
 void GxEPD2_1248c::clearScreen(uint8_t value)
